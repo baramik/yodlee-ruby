@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'pry'
 require 'logger'
 require 'uri'
 require "json"

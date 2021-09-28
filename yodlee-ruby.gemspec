@@ -5,7 +5,7 @@ require_relative "lib/yodlee/version"
 Gem::Specification.new do |spec|
   spec.name          = "yodlee-ruby"
   spec.version       = Yodlee::VERSION
-  spec.authors       = ["dmitrybaramikov"]
+  spec.authors       = ["Dmitry Baramikov"]
   spec.email         = ["baramik1989@gmail.com"]
 
   spec.summary       = "Yodlee API 1.1 client"
