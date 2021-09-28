@@ -10,7 +10,7 @@ module Yodlee
       }.freeze
 
       def http_client
-        @http_client ||= FaradayHttpClient.new(base_url: config.api_endpoint)
+        @http_client ||= Yodlee::FaradayHttpClient.new(base_url: config.api_endpoint)
       end
 
       def config
