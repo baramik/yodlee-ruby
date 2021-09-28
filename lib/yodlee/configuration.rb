@@ -12,7 +12,7 @@ module Yodlee
 
     def initialize
       @logger = find_logger(logger)
-      @cache = true
+      @cache = false
       @api_version = :v1
       @api_endpoint = "https://development.api.yodlee.com/ysl"
       @redis_endpoint = "redis://localhost:6379"
@@ -29,6 +29,24 @@ module Yodlee
       raise ArgumentError unless api_endpoint
 
       @api_endpoint = api_endpoint
+    end
+
+    def client_id=(client_id)
+      raise ArgumentError unless client_id
+
+      @client_id = client_id
+    end
+
+    def admin_login=(admin_login)
+      raise ArgumentError unless admin_login
+
+      @admin_login = admin_login
+    end
+
+    def client_secret=(client_secret)
+      raise ArgumentError unless client_secret
+
+      @client_secret = client_secret
     end
 
     def cache=(value)
