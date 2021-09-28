@@ -7,6 +7,7 @@ require "redis"
 require "concurrent-ruby"
 
 require_relative "yodlee/version"
+require_relative 'yodlee/faraday_http_client'
 require_relative "yodlee/products/base_product"
 require_relative "yodlee/products/v1/accounts"
 require_relative "yodlee/products/v1/auth"
