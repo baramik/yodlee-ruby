@@ -6,7 +6,7 @@ module Yodlee
   class ApiClient
     class << self
       AVAILABLE_PRODUCTS = {
-        v1: %i[accounts providers auth users transactions]
+        v1: %i[accounts providers auth users transactions provider_accounts]
       }.freeze
 
       def http_client
@@ -28,7 +28,7 @@ module Yodlee
 
         if AVAILABLE_PRODUCTS[current_config_version].include?(method)
           Object
-            .const_get("Yodlee::#{current_config_version.capitalize}::#{method.capitalize}")
+            .const_get("Yodlee::#{current_config_version.capitalize}::#{method.camelize}")
             .new(http_client: http_client, configuration: config)
         else
           super
