@@ -29,7 +29,7 @@ module Yodlee
         if AVAILABLE_PRODUCTS[current_config_version].include?(method)
           Object
             .const_get("Yodlee::#{current_config_version.capitalize}::#{method.to_s.camelize}")
-            .new(http_client: http_client, configuration: config)
+            .new(http_client: http_client, configuration: config, callback: block)
         else
           super
         end

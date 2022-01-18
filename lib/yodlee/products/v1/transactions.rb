@@ -18,7 +18,7 @@ module Yodlee
           query_params = params.merge(fromDate: from_date, skip: skip, top: txn_per_page )
 
           promises << Concurrent::Promises.future_on(thread_pool) do
-            response_body = http_client.get("transactions", body: query_params, auth_token: auth_token)
+            response_body = http_client.get("transactions", body: query_params, auth_token: auth_token, callback: callback)
 
             if response_body['transaction']
               fetched_transactions.concat([response_body['transaction'].reject(&:nil?)])
@@ -35,7 +35,7 @@ module Yodlee
       def get_count(from_date:, auth_token:)
         relative_path = "transactions/count?fromDate=#{from_date}"
 
-        http_client.get(relative_path, auth_token: auth_token)
+        http_client.get(relative_path, auth_token: auth_token, callback: callback)
       end
     end
   end

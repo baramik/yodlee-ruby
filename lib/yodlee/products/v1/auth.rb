@@ -15,7 +15,7 @@ module Yodlee
         headers = AUTH_BASE_HEADERS.merge({ 'loginName' => login_name })
         body = { clientId: configuration.client_id, secret: configuration.client_secret }
         form_data = URI.encode_www_form(body)
-        response = http_client.post('auth/token', body: form_data, headers: headers)
+        response = http_client.post('auth/token', body: form_data, headers: headers, callback: callback)
 
         token_expiration = response.dig('token', 'expiresIn')
 
