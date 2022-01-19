@@ -23,12 +23,16 @@ module Yodlee
         yield(config)
       end
 
+      def camelize(string)
+        string.split('_').collect(&:capitalize).join
+      end
+
       def method_missing(method, *args, &block)
         current_config_version = config.api_version.downcase.to_sym
 
         if AVAILABLE_PRODUCTS[current_config_version].include?(method)
           Object
-            .const_get("Yodlee::#{current_config_version.capitalize}::#{method.to_s.camelize}")
+            .const_get("Yodlee::#{current_config_version.capitalize}::#{camelize(method.to_s)}")
             .new(http_client: http_client, configuration: config)
         else
           super

@@ -5,8 +5,6 @@ require "json"
 require "faraday"
 require "redis"
 require "concurrent-ruby"
-require "active_support"
-require "active_support/core_ext"
 
 require_relative "yodlee/version"
 require_relative 'yodlee/faraday_http_client'
