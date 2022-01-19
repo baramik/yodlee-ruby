@@ -12,15 +12,14 @@ module Yodlee
 
     YODLEE_TRANS_FETCH_POOL_SIZE = 5
 
-    def initialize(http_client:, configuration:, callback: nil)
+    def initialize(http_client:, configuration:)
       @http_client = http_client
       @configuration = configuration
-      @callback = callback
     end
 
     private
 
-    attr_reader :http_client, :configuration, :callback
+    attr_reader :http_client, :configuration
 
     def send_authenticated_request(auth_token:)
       DEFAULT_HEADERS.merge('Authorization' => "Bearer #{auth_token}")

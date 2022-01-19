@@ -1,7 +1,7 @@
 module Yodlee
   module V1
     class Transactions < Yodlee::BaseProduct
-      def get_all(from_date: '2013-01-01', auth_token:, params: {}, txn_per_page: 500)
+      def get_all(from_date: '2013-01-01', auth_token:, params: {}, txn_per_page: 500, &callback)
         transactions_count_response = get_count(from_date: from_date, auth_token: auth_token)
         transactions_count = transactions_count_response.dig("transaction", "TOTAL", "count")
 
@@ -32,7 +32,7 @@ module Yodlee
         { "transaction" => fetched_transactions.flatten! }
       end
 
-      def get_count(from_date:, auth_token:)
+      def get_count(from_date:, auth_token:, &callback)
         relative_path = "transactions/count?fromDate=#{from_date}"
 
         http_client.get(relative_path, auth_token: auth_token, callback: callback)
