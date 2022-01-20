@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    yodlee-ruby (0.1.0)
+    yodlee-ruby (0.2.0)
       concurrent-ruby
       faraday
       redis
@@ -87,4 +87,4 @@ DEPENDENCIES
   yodlee-ruby!
 
 BUNDLED WITH
-   2.1.4
+   2.2.22
