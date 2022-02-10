@@ -5,6 +5,7 @@ module Yodlee
         transactions_count_response = get_count(from_date: from_date, auth_token: auth_token)
         transactions_count = transactions_count_response.dig("transaction", "TOTAL", "count")
 
+        return transactions_count_response if transactions_count_response['errorCode']
         return if transactions_count.nil? || transactions_count.zero?
 
         pages_count = transactions_count.fdiv(txn_per_page).ceil + 1
