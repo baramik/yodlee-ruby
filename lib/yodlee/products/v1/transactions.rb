@@ -1,7 +1,7 @@
 module Yodlee
   module V1
     class Transactions < Yodlee::BaseProduct
-      def get_all(from_date: '2013-01-01', auth_token:, params: {}, txn_per_page: 500, &callback)
+      def get_all(from_date: '2013-01-01', auth_token:, params: {}, txn_per_page: 500, account_ids: [], &callback)
         transactions_count_response = get_count(from_date: from_date, auth_token: auth_token)
         transactions_count = transactions_count_response.dig("transaction", "TOTAL", "count")
 
@@ -17,6 +17,7 @@ module Yodlee
         pages_count.times do |page|
           skip = page * txn_per_page
           query_params = params.merge(fromDate: from_date, skip: skip, top: txn_per_page )
+          query_params.merge!(accountId: account_ids.join(",")) if account_ids.present?
 
           promises << Concurrent::Promises.future_on(thread_pool) do
             response_body = http_client.get("transactions", body: query_params, auth_token: auth_token, callback: callback)
